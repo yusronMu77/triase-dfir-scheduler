@@ -4,7 +4,12 @@ version = "0.1.0"
 description = "Penjadwalan digest dan tugas berkala."
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = ["astria-common[otel]", "astria-contracts"]
+dependencies = [
+    "astria-common[otel]",
+    "astria-contracts",
+    "croniter>=6.2.4,<7",
+    "jinja2>=3.1.6,<3.2",
+]
 
 [project.scripts]
 astria-scheduler = "astria_scheduler.__main__:main"

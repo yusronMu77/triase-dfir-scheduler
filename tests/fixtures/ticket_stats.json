@@ -1,0 +1,8 @@
+{
+  "dari": "2026-11-09T07:00:00+07:00",
+  "sampai": "2026-11-10T07:00:00+07:00",
+  "total": 7,
+  "per_status": {"baru": 2, "ditinjau": 1, "diselidiki": 1, "eskalasi": 1, "selesai": 2},
+  "per_band": {"KRITIS": 1, "TINGGI": 2, "SEDANG": 3, "RENDAH": 1},
+  "sla_terlanggar": 1
+}

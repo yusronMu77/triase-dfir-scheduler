@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Digest harian Astria {{ digest_id }}</title>
+<style>
+  body { font-family: system-ui, sans-serif; color: #112c3b; background: #f4f7f5; margin: 2rem; line-height: 1.5; }
+  h1 { font-size: 1.4rem; margin-bottom: 0.25rem; }
+  .meta, .kaki { color: #4a5d68; font-size: 0.9rem; }
+  .lencana { display: inline-block; border: 1px solid #008775; color: #008775; border-radius: 4px; padding: 0 0.4rem; font-size: 0.8rem; }
+  .peringatan { border-left: 4px solid #b54708; background: #fff4e5; padding: 0.5rem 0.75rem; }
+  table { border-collapse: collapse; margin: 0.5rem 0 1rem; }
+  th, td { border: 1px solid #c9d4d0; padding: 0.25rem 0.6rem; text-align: left; }
+  th { background: #e4ece8; }
+</style>
+</head>
+<body>
+<p class="kaki">Rahasia internal</p>
+<h1>Digest harian {{ digest_id }}</h1>
+<p class="meta">Periode {{ periode_mulai | wib }} sampai {{ periode_selesai | wib }}. Disusun {{ disusun | wib }}.
+  <span class="lencana">narasi templat</span></p>
+{% if terlambat %}
+<p class="peringatan">Digest ini terlambat {{ terlambat_menit }} menit dari jadwal {{ periode_selesai | wib }}.</p>
+{% endif %}
+{% if ringkasan is none %}
+<p class="peringatan">Sumber tidak terbaca sejak {{ tidak_terbaca_sejak | wib }}: ticket tidak menjawab. Angka dan daftar tiket periode ini tidak tersedia.</p>
+{% else %}
+{% set s = ringkasan.statistik %}
+<h2>Ringkasan</h2>
+<p>Dalam periode ini tercatat {{ s.total }} tiket; {{ s.sla_terlanggar }} di antaranya melewati batas SLA.</p>
+<h2>Tiket per band</h2>
+<table>
+  <tr><th>Band</th><th>Jumlah</th></tr>
+  {% for band, jumlah in s.per_band | dictsort %}<tr><td>{{ band }}</td><td>{{ jumlah }}</td></tr>
+  {% endfor %}
+</table>
+<h2>Tiket per status</h2>
+<table>
+  <tr><th>Status</th><th>Jumlah</th></tr>
+  {% for status, jumlah in s.per_status | dictsort %}<tr><td>{{ status }}</td><td>{{ jumlah }}</td></tr>
+  {% endfor %}
+</table>
+<h2>Antrean teratas</h2>
+{% if ringkasan.tiket %}
+<table>
+  <tr><th>Tiket</th><th>Judul</th><th>Band</th><th>Status</th></tr>
+  {% for t in ringkasan.tiket %}<tr><td>{{ t.card_id }}</td><td>{{ t.judul }}</td><td>{{ t.band }}</td><td>{{ t.status }}</td></tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>Tidak ada tiket di antrean.</p>
+{% endif %}
+{% endif %}
+<p class="kaki">Angka dari ticket, disusun scheduler tanpa model bahasa. Templat {{ versi_templat }}.</p>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "items": [
+    {"card_id": "IC-20261110-003", "judul": "Kegagalan logon beruntun akun svc-backup", "band": "TINGGI", "status": "diselidiki"},
+    {"card_id": "IC-20261110-004", "judul": "Tugas terjadwal baru di WS-HR-11 <script>alert(1)</script> & co", "band": "SEDANG", "status": "baru"},
+    {"card_id": "IC-20261109-012", "judul": "Pemindaian port internal dari 10.20.8.31", "band": "RENDAH", "status": "selesai"}
+  ],
+  "next_cursor": null
+}
